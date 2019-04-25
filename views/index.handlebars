@@ -1,0 +1,80 @@
+<nav class="navbar gradient-bg">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand">Eat Da Burger</a>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid up-20 body-bg">
+    <div class="row text-center">
+        <img src="assets/img/200x200.png"/>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12 content">
+                <div class="col-md-4">
+                    <h3 class="text-center">Your favourite List</h3>
+                    <ul class="list">
+                        {{#each results}}
+                            {{#unless devoured}}
+                            <li><p class="item"><i class="fa fa-arrow-circle-right"></i> {{burger_name}}</p></li>
+                            {{/unless}}
+                        {{else}}
+                            <li><p class="empty">List is empty</p></li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="text-center">&nbsp;</h3>
+                    <ul class="list">
+                        {{#each results}}
+                            {{#unless devoured}}
+                            <li>
+                                <form action="/devoured" method="POST">
+                                    <input type="hidden" name="id" value="{{id}}">
+                                    <button class="btn btn-danger" type="submit"><i class="fa fa-check-circle"></i> Devoured</button>
+                                </form>
+                            </li>
+                            {{/unless}}
+
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="text-center">Your already devoured</h3>
+                    <ul  class="list">
+                        {{#each results}}
+                            {{#if devoured}}
+                                <li><p class="item"><i class="fa fa-check"></i> {{burger_name}}</p></li>
+                            {{/if}}
+
+                            {{else}}
+                                <li><p class="empty">List is empty</p></li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 well">
+               <form class="form-horizontal" method="post" action="/">
+                   <div class="form-group">
+                       <div class="col-md-8 col-md-offset-2">
+                           <textarea id="burger_name" class="form-control" name="burger_name" rows="3" required></textarea>
+                       </div>
+                   </div>
+                   <input type="hidden" name="devoured" value="0">
+
+                   <div class="form-group text-center">
+                       <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Submit</button>
+                   </div>
+
+                   <p class="footnote text-center">Enter the burger you want to eat and click the "Submit" button.</p>
+               </form>
+            </div>
+        </div>
+    </div>
+
+</div>
